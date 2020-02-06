@@ -4,7 +4,7 @@
         <input type="text" placeholder="Last Name" v-model="obj.lastName" />
         <input type="text" placeholder="House" v-model="obj.house" />
         <input type="text" placeholder="Known As" v-model="obj.knownAs" />
-        <button type="submit">{{text}}</button>
+        <button type="submit" style="background-color: greenyellow">{{text}}</button>
     </form>
 </template>
 
