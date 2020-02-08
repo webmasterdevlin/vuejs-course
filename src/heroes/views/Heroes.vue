@@ -1,49 +1,54 @@
 <template>
   <section>
-    <h1>Heroes Works!</h1>
     <div v-if="editingTracker === '0'">
       <Form :text="'SAVE'" :obj="heroForm" @handleSubmit="onSave" />
     </div>
     <h3 v-if="isLoading">loading..</h3>
-    <section v-else>
-      <ul v-if="heroes.length > 0">
-        <li v-for="hero in heroes" :key="hero.id">
+    <section v-else class="mx-auto">
+      <div v-if="heroes.length > 0" >
+        <div v-for="hero in heroes" :key="hero.id" class="card my-4">
+          <div class="card-body">
           <Form
             :text="'UPDATE'"
             :obj="hero"
             @handleSubmit="onUpdate(hero)"
             v-if="editingTracker === hero.id"
           />
-          <span v-else>{{
-            `${hero.firstName} ${hero.lastName} is ${hero.knownAs}`
-          }}</span>
-
+            <div v-else class="mb-4">
+              <h5 class="card-title mb-3">{{
+                `${hero.firstName} ${hero.lastName} is ${hero.knownAs}`
+                }}</h5>
+              <p class="card-text">{{ hero.house }}</p>
+            </div>
           <div>
-            <button
+            <b-button
               v-if="editingTracker === hero.id"
-              @click="() => (editingTracker = '0')"
-              style="background-color: lightcyan"
+              @click="() => editingTracker = '0'"
+              variant="outline-primary"
+              class="mr-2"
             >
               CANCEL
-            </button>
-            <button
+            </b-button>
+            <b-button
               v-else
               @click="() => (editingTracker = hero.id)"
-              style="background-color: lightcyan"
+              variant="primary"
+              class="mr-2"
             >
               EDIT
-            </button>
+            </b-button>
 
-            <button @click="goDetail(hero.id)">DETAIL</button>
-            <button
+            <b-button @click="goDetail(hero.id)" variant="info" class="mr-2">DETAIL</b-button>
+            <b-button
               @click="removeHero(hero.id)"
-              style="background-color: deeppink"
+              variant="danger"
             >
               DELETE
-            </button>
+            </b-button>
           </div>
-        </li>
-      </ul>
+        </div>
+        </div>
+      </div>
       <h3 v-else>List is empty</h3>
     </section>
   </section>
